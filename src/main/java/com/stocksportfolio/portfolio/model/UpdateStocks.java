@@ -18,6 +18,7 @@ public class UpdateStocks {
     private Double high;
     private Double low;
     private Double close;
+    @Column(name = "last")
     private Double last;
 
     @Column(name = "prev_close")
@@ -56,6 +57,12 @@ public class UpdateStocks {
         this.timestamp = timestamp;
         this.totalTrades = totalTrades;
         this.isin = isin;
+    }
+
+    public UpdateStocks(long id, String symbol, double last) {
+        this.id = id;
+        this.symbol = symbol;
+        this.last = last;
     }
 
     public Long getId() {
@@ -189,4 +196,6 @@ public class UpdateStocks {
                 ", isin='" + isin + '\'' +
                 '}';
     }
+
+
 }

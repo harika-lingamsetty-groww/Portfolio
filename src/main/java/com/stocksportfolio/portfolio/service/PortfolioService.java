@@ -36,7 +36,7 @@ public class PortfolioService {
         List<PortfolioResponse.Holding> holdings = new ArrayList<>();
         double totalBuyPrice = 0.0;
         int totalQuantity = 0;
-        double totalcurrentPrice = 0.0;
+        double totalholdings = 0.0;
 
         for (Portfolio portfolio : portfolios) {
             totalBuyPrice += portfolio.getTotalBuyPrice();
@@ -44,7 +44,7 @@ public class PortfolioService {
 
             UpdateStocks stock = portfolio.getStock();
             if (stock != null) {
-                totalcurrentPrice += stock.getLast();
+                totalholdings += stock.getLast() * portfolio.getQuantity();
 
                 PortfolioResponse.Holding holding = getHolding(portfolio, stock);
 
@@ -56,8 +56,8 @@ public class PortfolioService {
 
         response.setHoldings(holdings);
         response.setTotalBuyPrice(totalBuyPrice);
-        response.setTotalPortfolioHolding(totalcurrentPrice * totalQuantity);
-        response.setTotalPLandPLPercentage(totalcurrentPrice, totalBuyPrice);
+        response.setTotalPortfolioHolding(totalholdings);
+        response.setTotalPLandPLPercentage(totalholdings, totalBuyPrice);
 
         return response;
     }
@@ -69,7 +69,7 @@ public class PortfolioService {
         holding.setQuantity(portfolio.getQuantity());
         holding.setBuyPrice(portfolio.getBuyPrice());
         holding.setCurrentPrice(stock.getLast());
-        holding.setGainLoss(holding.getQuantity() * (holding.getCurrentPrice() - holding.getBuyPrice()));
+        holding.setGainLoss(holding.getCurrentPrice() - holding.getBuyPrice());
         double gainLossPercentage = (holding.getGainLoss() / holding.getBuyPrice()) * 100;
         holding.setGainLossPercentage(String.format("%.2f%%", gainLossPercentage));
         return holding;

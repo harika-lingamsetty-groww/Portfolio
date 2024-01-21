@@ -19,16 +19,16 @@ public class Portfolio {
     private UpdateStocks stock;
 
     @Column(name = "quantity")
-    private Integer quantity;
+    private Integer quantity =0;
 
     @Column(name = "buy_price")
     private Double buyPrice;
 
 
     @Column(name = "total_buy_price")
-    private Double totalBuyPrice;
+    private Double totalBuyPrice=0.0;
 
-    // Getters and setters
+
 
     public Long getId() {
         return id;

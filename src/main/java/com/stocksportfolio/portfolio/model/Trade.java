@@ -33,7 +33,6 @@ public class Trade {
     @JoinColumn(name = "stock_id", nullable = false)
     private UpdateStocks stock;
 
-    // Getters and setters
 
     public Long getId() {
         return id;

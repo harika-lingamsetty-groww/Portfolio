@@ -11,9 +11,7 @@ public class PortfolioResponse {
     private Double totalPortfolioHolding;
     private Double totalBuyPrice;
     private String totalPLPercentage;
-    private Double averageBuyPrice;
 
-    // Getters and setters
 
     public List<Holding> getHoldings() {
         return holdings;
@@ -49,12 +47,16 @@ public class PortfolioResponse {
     }
 
     public void setTotalPLandPLPercentage(double v, double v1) {
-        double percentage = Math.abs(((v - v1) / v1) * 100);
-
-        if (v > v1) {
-            this.totalPLPercentage = String.format("%.2f%% Profit", percentage);
+        if (v == 0 && v1 == 0) {
+            this.totalPLPercentage = "0.00%";
         } else {
-            this.totalPLPercentage = String.format("%.2f%% Loss", percentage);
+            double percentage = Math.abs(((v - v1) / v1) * 100);
+
+            if (v > v1) {
+                this.totalPLPercentage = String.format("%.2f%% Profit", percentage);
+            } else {
+                this.totalPLPercentage = String.format("%.2f%% Loss", percentage);
+            }
         }
     }
 
@@ -67,7 +69,6 @@ public class PortfolioResponse {
         private Double gainLoss;
         private String gainLossPercentage;
 
-        // Getters and setters for Holding
 
         public Long getStockId() {
             return stockId;

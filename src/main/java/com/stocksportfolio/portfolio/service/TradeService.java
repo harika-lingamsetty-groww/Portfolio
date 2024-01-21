@@ -106,7 +106,7 @@ public class TradeService {
 
             portfolioRepository.save(portfolio);
 
-            // Create UserTrade entry
+
             UserTrade userTrade = new UserTrade();
             userTrade.setUser(user);
             userTrade.setTrade(trade);

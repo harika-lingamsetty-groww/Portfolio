@@ -89,4 +89,5 @@ public class User {
     public void setTrades(Set<Trade> trades) {
         this.trades = trades;
     }
+
 }
